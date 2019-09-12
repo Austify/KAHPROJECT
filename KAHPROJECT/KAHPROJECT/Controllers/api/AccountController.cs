@@ -4,6 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using System.Net;
+using Microsoft.EntityFrameworkCore;
+using KAHPROJECT.Models;
 
 namespace KAHPROJECT.Controllers.api
 {
@@ -11,11 +16,21 @@ namespace KAHPROJECT.Controllers.api
     [ApiController]
     public class AccountController : ControllerBase
     {
-        public IActionResult Login()
+        private ApplicationDbContext _context;
+        public AccountController(ApplicationDbContext context)
         {
-            if (!ModelState.IsValid)
-                throw new Exception();
-            return Content("Api works");
+            _context = context;
         }
+       
+  
+
+        [HttpPost]
+        public Users UserLogin([FromBody]Users user)
+        {
+           
+            return user;
+        }
+
+
     }
 }
